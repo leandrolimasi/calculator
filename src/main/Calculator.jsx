@@ -34,7 +34,13 @@ export default class Calculator extends Component {
             const equals = operation === '=';
             const currentOperation = this.state.operation;
             const values = [...this.state.values];
-            values[0] = eval(`${values[0]} ${currentOperation} ${values[1]}`);
+            
+            try {
+                values[0] = eval(`${values[0]} ${currentOperation} ${values[1]}`);
+            } catch(e){
+                values[0] = this.state.value[0];
+            }
+            
             values[1] = 0;
 
             this.setState({
